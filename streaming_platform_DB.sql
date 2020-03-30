@@ -15,6 +15,16 @@ CREATE TABLE digital_content
     PRIMARY KEY (content_id)
 );
 
+CREATE TABLE actor
+(
+    actor_id VARCHAR(8),
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    date_of_birth DATE NOT NULL,
+    country_of_origin VARCHAR(50) NOT NULL,
+    gender CHAR(6),
+    PRIMARY KEY (actor_id)
+);
 
 CREATE TABLE cast
 (
@@ -27,18 +37,6 @@ CREATE TABLE cast
     FOREIGN KEY (actor_id)
         REFERENCES actor (actor_id)
         ON DELETE CASCADE
-);
-
-
-CREATE TABLE actor
-(
-    actor_id VARCHAR(8),
-    first_name VARCHAR(30) NOT NULL,
-    last_name VARCHAR(30) NOT NULL,
-    date_of_birth DATE NOT NULL,
-    country_of_origin VARCHAR(50) NOT NULL,
-    gender CHAR(6),
-    PRIMARY KEY (actor_id)
 );
 
 
@@ -78,6 +76,13 @@ CREATE TABLE episode
         ON DELETE CASCADE
 );
 
+CREATE TABLE country
+(
+    country_name VARCHAR(50),
+    subscription_price FLOAT(2),
+    currency CHAR(3),
+    PRIMARY KEY (country_name)
+);
 
 CREATE TABLE platform_user
 (
@@ -95,10 +100,9 @@ CREATE TABLE platform_user
         ON DELETE CASCADE
 );
 
-
 CREATE TABLE watched
 (
-    email VARCHAR(8),
+    email VARCHAR(50),
     content_id VARCHAR(8),
     PRIMARY KEY (email , content_id),
     FOREIGN KEY (content_id)
@@ -108,16 +112,6 @@ CREATE TABLE watched
         REFERENCES platform_user (email)
         ON DELETE CASCADE
 );
-
-
-CREATE TABLE country
-(
-    country_name VARCHAR(50),
-    subscription_price FLOAT(2),
-    currency CHAR(3),
-    PRIMARY KEY (country_name)
-);
-
 
 CREATE TABLE availability
 (
