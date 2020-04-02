@@ -120,7 +120,33 @@ INSERT DIGITAL_CONTENT VALUES
  ('South Korea',19,'WON'),
  ('Denmark',20,'DKK'); 
  
+<<<<<<< HEAD
   INSERT AVAILABILITY VALUES
+=======
+ INSERT PLATFORM_USER VALUES
+ ('kkk@gmail.com','john','doe','MALE','1999-09-09','UK','2017-01-01','NO'),
+ ('jd@gmail.com','jane','doe','FEMALE','1999-09-05','UK','2019-01-01','YES'),
+ ('th@gmail.com','tom','hane','MALE','1989-09-09','USA','2014-01-01','NO'),
+ ('ind@gmail.com','jay','singh','MALE','1996-06-06','India','2010-01-01','YES'),
+ ('gk@gmail.com','kostas','tosikis','MALE','2000-09-09','Greece','2018-01-01','NO'),
+ ('sks@gmail.com','chan','lee','FEMALE','1998-01-01','South Korea','2019-10-10','YES'),
+ ('dkk@gmail.com','tina','hansen','FEMALE','1994-04-04','Denmark','2020-02-02','YES'); 
+ 
+ INSERT WATCHED VALUES
+ ('kkk@gmail.com','ST100001'),
+ ('kkk@gmail.com','ST100002'),
+ ('kkk@gmail.com','ST100010'), 
+ ('jd@gmail.com','ST100001'),
+ ('gk@gmail.com','ST100002'),
+ ('sks@gmail.com','ST100005'),
+ ('sks@gmail.com','ST100009'),
+ ('sks@gmail.com','ST100017'),
+ ('sks@gmail.com','ST100004'),
+ ('sks@gmail.com','ST100010'),
+ ('dkk@gmail.com','ST100005');
+ 
+ INSERT AVAILABILITY VALUES
+>>>>>>> 3ba438c7ba764b6542cd119339e4b3ebe355a32f
  ('ST100001','India'),
  ('ST100001','UK'),
  ('ST100001','USA'),
