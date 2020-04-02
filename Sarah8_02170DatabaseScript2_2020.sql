@@ -1,3 +1,5 @@
+USE streaming_platform;
+
 INSERT DIGITAL_CONTENT VALUES 
  ('ST100001','Topgun','MOVIE','Paramount Pictures','USA','Action','1986-08-08',FALSE,'Tony Scott'),
  ('ST100002','Despicable Me','MOVIE','Illumination','USA','Animation','2010-07-09',FALSE,'Pierre Coffin/Chris Renaud'),
@@ -110,7 +112,7 @@ INSERT DIGITAL_CONTENT VALUES
  ('ST100016',1,2,'KTS1E2','2017-02-02','00:30:00'),
  ('ST100017',1,18,'FWS1E18','2019-02-02','00:22:00'); 
  
- INSERT COUNTRY VALUES
+  INSERT COUNTRY VALUES
  ('India',10,'INR'),
  ('USA',5,'USD'),
  ('UK',6,'GPB'),
@@ -118,29 +120,7 @@ INSERT DIGITAL_CONTENT VALUES
  ('South Korea',19,'WON'),
  ('Denmark',20,'DKK'); 
  
- INSERT PLATFORM_USER VALUES
- ('kkk@gmail.com','john','doe','MALE','1999-09-09','UK','2017-01-01','NO'),
- ('jd@gmail.com','jane','doe','FEMALE','1999-09-05','UK','2019-01-01','YES'),
- ('th@gmail.com','tom','hane','MALE','1989-09-09','USA','2014-01-01','NO'),
- ('ind@gmail.com','jay','singh','MALE','1996-06-06','India','2010-01-01','YES'),
- ('gk@gmail.com','kostas','tosikis','MALE','2000-09-09','Greece','2018-01-01','NO'),
- ('sks@gmail.com','chan','lee','FEMALE','1998-01-01','South Korea','2019-10-10','YES'),
- ('dkk@gmail.com','tina','hansen','FEMALE','1994-04-04','Denmark','2020-02-02','YES'); 
- 
- INSERT WATCHED VALUES
- ('kkk@gmail.com','ST100001'),
- ('kkk@gmail.com','ST100002'),
- ('kkk@gmail.com','ST100010'), 
- ('jd@gmail.com','ST100001'),
- ('gk@gmail.com','ST100002'),
- ('sks@gmail.com','ST100005'),
- ('sks@gmail.com','ST100009'),
- ('sks@gmail.com','ST100017'),
- ('sks@gmail.com','ST100004'),
- ('sks@gmail.com','ST100010'),
- ('dkk@gmail.com','ST100005'); */
- 
- INSERT AVAILABILITY VALUES
+  INSERT AVAILABILITY VALUES
  ('ST100001','India'),
  ('ST100001','UK'),
  ('ST100001','USA'),
@@ -184,14 +164,36 @@ INSERT DIGITAL_CONTENT VALUES
  ('ST100017','Denmark'),
  ('ST100017','South Korea');
  
- select * from digital_content;
- select * from actor;
- select * from cast;
- select * from movie;
- select * from tv_show;
- select * from episode;
- select * from country;
- select * from platform_user;
- select * from watched;
- select * from availability;
+ INSERT PLATFORM_USER VALUES
+ ('kkk@gmail.com','john','doe','MALE','1999-09-09','UK','2017-01-01','NO'),
+ ('jd@gmail.com','jane','doe','FEMALE','1999-09-05','UK','2019-01-01','YES'),
+ ('th@gmail.com','tom','hane','MALE','1989-09-09','USA','2014-01-01','NO'),
+ ('ind@gmail.com','jay','singh','MALE','1996-06-06','India','2010-01-01','YES'),
+ ('gk@gmail.com','kostas','tosikis','MALE','2000-09-09','Greece','2018-01-01','NO'),
+ ('sks@gmail.com','chan','lee','FEMALE','1998-01-01','South Korea','2019-10-10','YES'),
+ ('dkk@gmail.com','tina','hansen','FEMALE','1994-04-04','Denmark','2020-02-02','YES'); 
+ 
+ INSERT WATCHED VALUES
+ ('kkk@gmail.com','ST100001'),
+ ('kkk@gmail.com','ST100002'),
+ ('kkk@gmail.com','ST100010'), 
+ ('jd@gmail.com','ST100001'),
+ ('gk@gmail.com','ST100002'),
+ ('sks@gmail.com','ST100005'),
+ ('sks@gmail.com','ST100009'),
+ ('sks@gmail.com','ST100017'),
+ ('sks@gmail.com','ST100004'),
+ ('sks@gmail.com','ST100010'),
+ ('dkk@gmail.com','ST100005'); 
+ 
+# select count(*) from digital_content;
+# select * from actor;
+# select * from cast;
+# select * from movie;
+# select * from tv_show;
+# select * from episode;
+# select * from country;
+# select * from platform_user;
+# select * from watched;
+# select * from availability;
  

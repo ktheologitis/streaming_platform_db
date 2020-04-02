@@ -1,8 +1,7 @@
 CREATE DATABASE streaming_platform;
 USE streaming_platform;
 
-CREATE TABLE digital_content
-(
+CREATE TABLE digital_content (
     content_id VARCHAR(8),
     title VARCHAR(50) NOT NULL,
     content_type CHAR(7),
@@ -26,6 +25,14 @@ CREATE TABLE actor
     PRIMARY KEY (actor_id)
 );
 
+CREATE TABLE country
+(
+    country_name VARCHAR(50),
+    subscription_price FLOAT(2),
+    currency CHAR(3),
+    PRIMARY KEY (country_name)
+);
+
 CREATE TABLE cast
 (
     content_id VARCHAR(8),
@@ -37,6 +44,7 @@ CREATE TABLE cast
     FOREIGN KEY (actor_id)
         REFERENCES actor (actor_id)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 
@@ -48,6 +56,7 @@ CREATE TABLE movie
     FOREIGN KEY (content_id)
         REFERENCES digital_content (content_id)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 
@@ -59,8 +68,8 @@ CREATE TABLE tv_show
     FOREIGN KEY (content_id)
         REFERENCES digital_content (content_id)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
-
 
 CREATE TABLE episode
 (
@@ -70,18 +79,11 @@ CREATE TABLE episode
     episode_name VARCHAR(50) NOT NULL,
     date_aired DATE NOT NULL,
     duration TIME,
-    PRIMARY KEY (content_id , season_number , episode_number),
+    PRIMARY KEY (content_id, season_number , episode_number),
     FOREIGN KEY (content_id)
         REFERENCES digital_content (content_id)
         ON DELETE CASCADE
-);
-
-CREATE TABLE country
-(
-    country_name VARCHAR(50),
-    subscription_price FLOAT(2),
-    currency CHAR(3),
-    PRIMARY KEY (country_name)
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE platform_user
@@ -93,11 +95,12 @@ CREATE TABLE platform_user
     date_of_birth DATE NOT NULL,
     country_name VARCHAR(50) NOT NULL,
     date_signup DATE,
-    payment_due CHAR(3),
+    payment_due VARCHAR(3),
     PRIMARY KEY (email),
     FOREIGN KEY (country_name)
         REFERENCES country (country_name)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE watched
@@ -111,6 +114,7 @@ CREATE TABLE watched
     FOREIGN KEY (email)
         REFERENCES platform_user (email)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
 
 CREATE TABLE availability
@@ -124,4 +128,5 @@ CREATE TABLE availability
     FOREIGN KEY (content_id)
         REFERENCES digital_content (content_id)
         ON DELETE CASCADE
+        ON UPDATE CASCADE
 );
