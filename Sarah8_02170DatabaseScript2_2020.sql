@@ -138,7 +138,7 @@ INSERT DIGITAL_CONTENT VALUES
  ('sks@gmail.com','ST100017'),
  ('sks@gmail.com','ST100004'),
  ('sks@gmail.com','ST100010'),
- ('dkk@gmail.com','ST100005'); */
+ ('dkk@gmail.com','ST100005');
  
  INSERT AVAILABILITY VALUES
  ('ST100001','India'),
