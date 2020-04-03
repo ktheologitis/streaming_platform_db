@@ -76,3 +76,10 @@ INSERT ACTOR VALUES
 # If wrong unreasonable (too long) duration in passed, insertion is cancelled in both tables.
 CALL add_movie('ST100095','Los Abrazos Rotos','AlmoProductions','Spain','Drama','2008-08-08',FALSE,'Pedro Almodovar', '06:50:00', @sts);
 SELECT @sts;
+					 
+# EVENT
+# Below it's an event that every 1 minute it goes to platform_user table and appends ' 1' to the first name of every record.
+SET GLOBAL event_scheduler = 1;
+CREATE EVENT InsertToPlatformUser ON SCHEDULE EVERY 1 MINUTE DO UPDATE platform_user SET first_name = CONCAT(first_name, ' 1');					 
+					 
+					 
