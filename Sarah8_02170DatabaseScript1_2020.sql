@@ -1,20 +1,20 @@
-DROP DATABASE IF EXISTS STREAMING_PLATFORM;
+DROP DATABASE IF EXISTS streaming_platform;
 
-CREATE DATABASE STREAMING_PLATFORM;
-USE STREAMING_PLATFORM;
+CREATE DATABASE streaming_platform;
+USE streaming_platform;
 
-DROP TABLE IF EXISTS AVAILABILITY;
-DROP TABLE IF EXISTS WATCHED;
-DROP TABLE IF EXISTS PLATFORM_USER;
-DROP TABLE IF EXISTS COUNTRY;
-DROP TABLE IF EXISTS EPISODE;
-DROP TABLE IF EXISTS TV_SHOW;
-DROP TABLE IF EXISTS MOVIE;
-DROP TABLE IF EXISTS CAST;
-DROP TABLE IF EXISTS ACTOR;
-DROP TABLE IF EXISTS DIGITAL_CONTENT;
+DROP TABLE if exists availability;
+DROP TABLE if exists watched;
+DROP TABLE if exists platform_user;
+DROP TABLE if exists country;
+DROP TABLE if exists episode;
+DROP TABLE if exists tv_show;
+DROP TABLE if exists movie;
+DROP TABLE if exists cast;
+DROP TABLE if exists actor;
+DROP TABLE if exists digital_content;
 
-CREATE TABLE DIGITAL_CONTENT
+CREATE TABLE digital_content
 (
     content_id VARCHAR(8),
     title VARCHAR(50) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE DIGITAL_CONTENT
     PRIMARY KEY (content_id)
 );
 
-CREATE TABLE ACTOR
+CREATE TABLE actor
 (
     actor_id VARCHAR(8),
     first_name VARCHAR(30) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE ACTOR
     PRIMARY KEY (actor_id)
 );
 
-CREATE TABLE CAST
+CREATE TABLE cast
 (
     content_id VARCHAR(8),
     actor_id VARCHAR(8) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE CAST
 );
 
 
-CREATE TABLE MOVIE
+CREATE TABLE movie
 (
     content_id VARCHAR(8),
     duration TIME,
@@ -64,7 +64,7 @@ CREATE TABLE MOVIE
 );
 
 
-CREATE TABLE TV_SHOW
+CREATE TABLE tv_show
 (
     content_id VARCHAR(8),
     number_of_seasons INT(2),
@@ -75,7 +75,7 @@ CREATE TABLE TV_SHOW
 );
 
 
-CREATE TABLE EPISODE
+CREATE TABLE episode
 (
     content_id VARCHAR(8),
     season_number INT(2) NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE EPISODE
         ON DELETE CASCADE
 );
 
-CREATE TABLE COUNTRY
+CREATE TABLE country
 (
     country_name VARCHAR(50),
     subscription_price FLOAT(2),
@@ -97,7 +97,7 @@ CREATE TABLE COUNTRY
     PRIMARY KEY (country_name)
 );
 
-CREATE TABLE PLATFORM_USER
+CREATE TABLE platform_user
 (
     email VARCHAR(50),
     first_name VARCHAR(50) NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE PLATFORM_USER
         ON DELETE CASCADE
 );
 
-CREATE TABLE WATCHED
+CREATE TABLE watched
 (
     email VARCHAR(50),
     content_id VARCHAR(8),
@@ -126,7 +126,7 @@ CREATE TABLE WATCHED
         ON DELETE CASCADE
 );
 
-CREATE TABLE AVAILABILITY
+CREATE TABLE availability
 (
     content_id VARCHAR(50),
     country_name VARCHAR(50),
@@ -139,20 +139,20 @@ CREATE TABLE AVAILABILITY
         ON DELETE CASCADE
 );
 
-DROP VIEW IF EXISTS SEE_SCIFI_STARS;
+drop view if exists SEE_SCIFI_STARS;
 
 CREATE VIEW SEE_SCIFI_STARS AS
-SELECT A.first_name, A.last_name
-FROM ACTOR as A
-INNER JOIN CAST AS C
+SELECT A.FIRST_NAME, A.LAST_NAME
+FROM actor as A
+INNER JOIN cast AS C
 ON A.ACTOR_ID = C.ACTOR_ID
-INNER JOIN DIGITAL_CONTENT AS D
+INNER JOIN digital_content AS D
 ON D.CONTENT_ID = C.CONTENT_ID
 WHERE D.GENRE = 'Sci-Fi';
 
 
 
-INSERT DIGITAL_CONTENT VALUES 
+INSERT digital_content VALUES 
  ('ST100001','Topgun','MOVIE','Paramount Pictures','USA','Action','1986-08-08',FALSE,'Tony Scott'),
  ('ST100002','Despicable Me','MOVIE','Illumination','USA','Animation','2010-07-09',FALSE,'Pierre Coffin/Chris Renaud'),
  ('ST100003','Jurassic Park','MOVIE','Amblin Entertainment','USA','Sci-Fi','1993-09-17',FALSE,'Steven Spielberg'),
@@ -164,7 +164,7 @@ INSERT DIGITAL_CONTENT VALUES
  ('ST100009','Interstellar','MOVIE','Legendary Pictures','USA','Sci-Fi','2014-11-06',FALSE,'Christopher Nolan'),
  ('ST100010','Transformers','MOVIE','dB Pictures','USA','Sci-Fi','2007-07-03',FALSE,'Michael Bay');
  
- INSERT DIGITAL_CONTENT VALUES 
+ INSERT digital_content VALUES 
  ('ST100011','Big Bang Theory','TV-SHOW','WarnerBros','USA','Comedy','2007-09-24',FALSE,'Mark Cendrowski'),
  ('ST100012','Stranger Things','TV-SHOW','Netflix','USA','Horror','2016-07-15',FALSE,'The Duffer Brothers'),
  ('ST100013','Friends','TV-SHOW','WarnerBros','USA','Comedy','1994-09-22',FALSE,'David and Marta'),
@@ -173,7 +173,7 @@ INSERT DIGITAL_CONTENT VALUES
  ('ST100016','Eisai To Tairi Mou','TV-SHOW','Andreas Tsakonas','Greece','Comedy','2001-10-01',FALSE,'Antonis Angelopoulos'),
  ('ST100017','Familiar Wife','TV-SHOW','tvN','South Korea','Romance','2018-09-01',FALSE,'Lee Sang-yeob'); 
  
- INSERT ACTOR VALUES
+ INSERT actor VALUES
  ('AC100001','Tom','Cruise','1962-07-23','USA','MALE'),
  ('AC100002','Sam','Niell','1947-09-14','USA','MALE'),
  ('AC100003','Laura','Dern','1967-02-10','USA','FEMALE'),
@@ -201,7 +201,7 @@ INSERT DIGITAL_CONTENT VALUES
  ('AC100025','Katerina','Lekhou','1967-09-05','Greece','FEMALE'),
  ('AC100026','Ji','Sung','1977-02-27','South Korea','MALE'); 
  
- INSERT CAST VALUES
+ INSERT cast VALUES
  ('ST100001','AC100001'),
  ('ST100003','AC100002'),
  ('ST100003','AC100003'),
@@ -230,7 +230,7 @@ INSERT DIGITAL_CONTENT VALUES
  ('ST100016','AC100025'),
  ('ST100017','AC100026'); 
  
- INSERT MOVIE VALUES
+ INSERT movie VALUES
  ('ST100001','01:50:00'),
  ('ST100002','01:35:00'),
  ('ST100003','02:07:00'),
@@ -242,7 +242,7 @@ INSERT DIGITAL_CONTENT VALUES
  ('ST100009','02:49:00'),
  ('ST100010','02:24:00'); 
  
- INSERT TV_SHOW VALUES
+ INSERT tv_show VALUES
  ('ST100011',12),
  ('ST100012',3),
  ('ST100013',10),
@@ -251,7 +251,7 @@ INSERT DIGITAL_CONTENT VALUES
  ('ST100016',1),
  ('ST100017',1); 
 
- INSERT EPISODE VALUES
+ INSERT episode VALUES
  ('ST100011',1,1,'BBS1E1','2007-09-24','00:20:00'),
  ('ST100011',2,3,'BBS2E3','2008-10-01','00:21:00'),
  ('ST100011',5,4,'BBS5E4','2009-09-21','00:22:00'),
@@ -264,7 +264,7 @@ INSERT DIGITAL_CONTENT VALUES
  ('ST100016',1,2,'KTS1E2','2017-02-02','00:30:00'),
  ('ST100017',1,18,'FWS1E18','2019-02-02','00:22:00'); 
  
- INSERT COUNTRY VALUES
+ INSERT country VALUES
  ('India',10,'INR'),
  ('USA',5,'USD'),
  ('UK',6,'GPB'),
@@ -272,7 +272,7 @@ INSERT DIGITAL_CONTENT VALUES
  ('South Korea',19,'WON'),
  ('Denmark',20,'DKK'); 
  
- INSERT PLATFORM_USER VALUES
+ INSERT platform_user VALUES
  ('kkk@gmail.com','john','doe','MALE','1999-09-09','UK','2017-01-01','NO'),
  ('jd@gmail.com','jane','doe','FEMALE','1999-09-05','UK','2019-01-01','YES'),
  ('th@gmail.com','tom','hane','MALE','1989-09-09','USA','2014-01-01','NO'),
@@ -281,7 +281,7 @@ INSERT DIGITAL_CONTENT VALUES
  ('sks@gmail.com','chan','lee','FEMALE','1998-01-01','South Korea','2019-10-10','YES'),
  ('dkk@gmail.com','tina','hansen','FEMALE','1994-04-04','Denmark','2020-02-02','YES'); 
  
- INSERT WATCHED VALUES
+ INSERT watched VALUES
  ('kkk@gmail.com','ST100001'),
  ('kkk@gmail.com','ST100002'),
  ('kkk@gmail.com','ST100010'), 
@@ -294,7 +294,7 @@ INSERT DIGITAL_CONTENT VALUES
  ('sks@gmail.com','ST100010'),
  ('dkk@gmail.com','ST100005'); 
  
- INSERT AVAILABILITY VALUES
+ INSERT availability VALUES
  ('ST100001','India'),
  ('ST100001','UK'),
  ('ST100001','USA'),
@@ -338,16 +338,16 @@ INSERT DIGITAL_CONTENT VALUES
  ('ST100017','Denmark'),
  ('ST100017','South Korea');
  
- select * from DIGITAL_CONTENT;
- select * from ACTOR;
- select * from CAST;
- select * from MOVIE;
- select * from TV_SHOW;
- select * from EPISODE;
- select * from COUNTRY;
- select * from PLATFORM_USER;
- select * from WATCHED;
- select * from AVAILABILITY;
+ select * from digital_content;
+ select * from actor;
+ select * from cast;
+ select * from movie;
+ select * from tv_show;
+ select * from episode;
+ select * from country;
+ select * from platform_user;
+ select * from watched;
+ select * from availability;
  
 SELECT * FROM SEE_SCIFI_STARS;
  
