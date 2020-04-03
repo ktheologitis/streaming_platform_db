@@ -197,6 +197,7 @@ VALUES
   ('ST100017', 'Denmark'),
   ('ST100017', 'South Korea');
 
+
 #select count(*)
 #from digital_content;
 

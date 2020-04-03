@@ -81,7 +81,7 @@ CREATE TABLE episode
     duration TIME,
     PRIMARY KEY (content_id, season_number , episode_number),
     FOREIGN KEY (content_id)
-        REFERENCES digital_content (content_id)
+        REFERENCES tv_show (content_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE
 );
