@@ -1,20 +1,20 @@
-DROP DATABASE IF EXISTS streaming_platform;
+DROP DATABASE IF EXISTS STREAMING_PLATFORM;
 
-CREATE DATABASE streaming_platform;
-USE streaming_platform;
+CREATE DATABASE STREAMING_PLATFORM;
+USE STREAMING_PLATFORM;
 
-DROP TABLE if exists availability;
-DROP TABLE if exists watched;
-DROP TABLE if exists platform_user;
-DROP TABLE if exists country;
-DROP TABLE if exists episode;
-DROP TABLE if exists tv_show;
-DROP TABLE if exists movie;
-DROP TABLE if exists cast;
-DROP TABLE if exists actor;
-DROP TABLE if exists digital_content;
+DROP TABLE IF EXISTS AVAILABILITY;
+DROP TABLE IF EXISTS WATCHED;
+DROP TABLE IF EXISTS PLATFORM_USER;
+DROP TABLE IF EXISTS COUNTRY;
+DROP TABLE IF EXISTS EPISODE;
+DROP TABLE IF EXISTS TV_SHOW;
+DROP TABLE IF EXISTS MOVIE;
+DROP TABLE IF EXISTS CAST;
+DROP TABLE IF EXISTS ACTOR;
+DROP TABLE IF EXISTS DIGITAL_CONTENT;
 
-CREATE TABLE digital_content
+CREATE TABLE DIGITAL_CONTENT
 (
     content_id VARCHAR(8),
     title VARCHAR(50) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE digital_content
     PRIMARY KEY (content_id)
 );
 
-CREATE TABLE actor
+CREATE TABLE ACTOR
 (
     actor_id VARCHAR(8),
     first_name VARCHAR(30) NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE actor
     PRIMARY KEY (actor_id)
 );
 
-CREATE TABLE cast
+CREATE TABLE CAST
 (
     content_id VARCHAR(8),
     actor_id VARCHAR(8) NOT NULL,
@@ -53,7 +53,7 @@ CREATE TABLE cast
 );
 
 
-CREATE TABLE movie
+CREATE TABLE MOVIE
 (
     content_id VARCHAR(8),
     duration TIME,
@@ -64,7 +64,7 @@ CREATE TABLE movie
 );
 
 
-CREATE TABLE tv_show
+CREATE TABLE TV_SHOW
 (
     content_id VARCHAR(8),
     number_of_seasons INT(2),
@@ -75,7 +75,7 @@ CREATE TABLE tv_show
 );
 
 
-CREATE TABLE episode
+CREATE TABLE EPISODE
 (
     content_id VARCHAR(8),
     season_number INT(2) NOT NULL,
@@ -89,7 +89,7 @@ CREATE TABLE episode
         ON DELETE CASCADE
 );
 
-CREATE TABLE country
+CREATE TABLE COUNTRY
 (
     country_name VARCHAR(50),
     subscription_price FLOAT(2),
@@ -97,7 +97,7 @@ CREATE TABLE country
     PRIMARY KEY (country_name)
 );
 
-CREATE TABLE platform_user
+CREATE TABLE PLATFORM_USER
 (
     email VARCHAR(50),
     first_name VARCHAR(50) NOT NULL,
@@ -113,7 +113,7 @@ CREATE TABLE platform_user
         ON DELETE CASCADE
 );
 
-CREATE TABLE watched
+CREATE TABLE WATCHED
 (
     email VARCHAR(50),
     content_id VARCHAR(8),
@@ -126,7 +126,7 @@ CREATE TABLE watched
         ON DELETE CASCADE
 );
 
-CREATE TABLE availability
+CREATE TABLE AVAILABILITY
 (
     content_id VARCHAR(50),
     country_name VARCHAR(50),
@@ -139,10 +139,10 @@ CREATE TABLE availability
         ON DELETE CASCADE
 );
 
-drop view if exists SEE_SCIFI_STARS;
+DROP VIEW IF EXISTS SEE_SCIFI_STARS;
 
 CREATE VIEW SEE_SCIFI_STARS AS
-SELECT A.FIRST_NAME, A.LAST_NAME
+SELECT A.first_name, A.last_name
 FROM ACTOR as A
 INNER JOIN CAST AS C
 ON A.ACTOR_ID = C.ACTOR_ID
@@ -338,16 +338,16 @@ INSERT DIGITAL_CONTENT VALUES
  ('ST100017','Denmark'),
  ('ST100017','South Korea');
  
- select * from digital_content;
- select * from actor;
- select * from cast;
- select * from movie;
- select * from tv_show;
- select * from episode;
- select * from country;
- select * from platform_user;
- select * from watched;
- select * from availability;
+ select * from DIGITAL_CONTENT;
+ select * from ACTOR;
+ select * from CAST;
+ select * from MOVIE;
+ select * from TV_SHOW;
+ select * from EPISODE;
+ select * from COUNTRY;
+ select * from PLATFORM_USER;
+ select * from WATCHED;
+ select * from AVAILABILITY;
  
 SELECT * FROM SEE_SCIFI_STARS;
  
