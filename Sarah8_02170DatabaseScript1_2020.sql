@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS streaming_platform;
+
 CREATE DATABASE streaming_platform;
 USE streaming_platform;
 
