@@ -1,7 +1,19 @@
 CREATE DATABASE streaming_platform;
 USE streaming_platform;
 
-CREATE TABLE digital_content (
+DROP TABLE if exists availability;
+DROP TABLE if exists watched;
+DROP TABLE if exists platform_user;
+DROP TABLE if exists country;
+DROP TABLE if exists episode;
+DROP TABLE if exists tv_show;
+DROP TABLE if exists movie;
+DROP TABLE if exists cast;
+DROP TABLE if exists actor;
+DROP TABLE if exists digital_content;
+
+CREATE TABLE digital_content
+(
     content_id VARCHAR(8),
     title VARCHAR(50) NOT NULL,
     content_type CHAR(7),
@@ -25,14 +37,6 @@ CREATE TABLE actor
     PRIMARY KEY (actor_id)
 );
 
-CREATE TABLE country
-(
-    country_name VARCHAR(50),
-    subscription_price FLOAT(2),
-    currency CHAR(3),
-    PRIMARY KEY (country_name)
-);
-
 CREATE TABLE cast
 (
     content_id VARCHAR(8),
@@ -44,7 +48,6 @@ CREATE TABLE cast
     FOREIGN KEY (actor_id)
         REFERENCES actor (actor_id)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
 );
 
 
@@ -56,7 +59,6 @@ CREATE TABLE movie
     FOREIGN KEY (content_id)
         REFERENCES digital_content (content_id)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
 );
 
 
@@ -68,8 +70,8 @@ CREATE TABLE tv_show
     FOREIGN KEY (content_id)
         REFERENCES digital_content (content_id)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
 );
+
 
 CREATE TABLE episode
 (
@@ -79,11 +81,18 @@ CREATE TABLE episode
     episode_name VARCHAR(50) NOT NULL,
     date_aired DATE NOT NULL,
     duration TIME,
-    PRIMARY KEY (content_id, season_number , episode_number),
+    PRIMARY KEY (content_id , season_number , episode_number),
     FOREIGN KEY (content_id)
         REFERENCES tv_show (content_id)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
+);
+
+CREATE TABLE country
+(
+    country_name VARCHAR(50),
+    subscription_price FLOAT(2),
+    currency CHAR(3),
+    PRIMARY KEY (country_name)
 );
 
 CREATE TABLE platform_user
@@ -95,12 +104,11 @@ CREATE TABLE platform_user
     date_of_birth DATE NOT NULL,
     country_name VARCHAR(50) NOT NULL,
     date_signup DATE,
-    payment_due VARCHAR(3),
+    payment_due CHAR(3),
     PRIMARY KEY (email),
     FOREIGN KEY (country_name)
         REFERENCES country (country_name)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
 );
 
 CREATE TABLE watched
@@ -114,7 +122,6 @@ CREATE TABLE watched
     FOREIGN KEY (email)
         REFERENCES platform_user (email)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
 );
 
 CREATE TABLE availability
@@ -128,5 +135,15 @@ CREATE TABLE availability
     FOREIGN KEY (content_id)
         REFERENCES digital_content (content_id)
         ON DELETE CASCADE
-        ON UPDATE CASCADE
 );
+
+drop view if exists SEE_SCIFI_STARS;
+
+CREATE VIEW SEE_SCIFI_STARS AS
+SELECT A.FIRST_NAME, A.LAST_NAME
+FROM ACTOR as A
+INNER JOIN CAST AS C
+ON A.ACTOR_ID = C.ACTOR_ID
+INNER JOIN DIGITAL_CONTENT AS D
+ON D.CONTENT_ID = C.CONTENT_ID
+WHERE D.GENRE = 'Sci-Fi';
