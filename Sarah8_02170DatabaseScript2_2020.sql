@@ -1,15 +1,15 @@
-USE streaming_platform
-SELECT content_id, date_release  FROM digital_content 
+USE STREAMING_PLATFORM ;
+SELECT content_id, date_release  FROM DIGITAL_CONTENT 
 GROUP BY content_id HAVING date_release > '2000-00-00';
 
-SELECT * FROM country
+SELECT * FROM COUNTRY
 WHERE country_name IN('Denmark','South Korea','India','Greece')
 ORDER BY subscription_price DESC ;
 
-SELECT * FROM tv_show NATURAL LEFT OUTER join episode
+SELECT * FROM TV_SHOW NATURAL LEFT OUTER join EPISODE
 GROUP BY content_id;
 
-SELECT * FROM tv_show NATURAL LEFT OUTER join episode;
+SELECT * FROM TV_SHOW NATURAL LEFT OUTER join EPISODE;
 
 # Find whether a user has paid or not
 DELIMITER $$
@@ -17,7 +17,7 @@ CREATE FUNCTION user_paid(vEmail VARCHAR(50)) RETURNS VARCHAR(3)
 BEGIN
 	DECLARE vDuePayment VARCHAR(3);
 		SELECT payment_due INTO vDuePayment 
-		FROM platform_user
+		FROM PLATFORM_USER
 		WHERE email=vEmail;
 	RETURN vDuePayment;
 END;$$
@@ -27,14 +27,14 @@ DELIMITER $$
 CREATE PROCEDURE users_digest(IN vEmail VARCHAR(50), OUT digest INT)
 BEGIN
 	SELECT Count(content_id) INTO digest
-	FROM platform_user, watched
-	WHERE platform_user.email = vEmail AND watched.email = vEmail;
+	FROM PLATFORM_USER, WATCHED
+	WHERE PLATFORM_USER.email = vEmail AND WATCHED.email = vEmail;
 END;$$
 
 # Create trigger that ensures correct gender is passed when inserting new tuple in the actor table
 DELIMITER $$
 CREATE TRIGGER check_gender
-BEFORE INSERT ON actor FOR EACH ROW
+BEFORE INSERT ON ACTOR FOR EACH ROW
 BEGIN
 	IF (NEW.gender NOT IN ("MALE", "FEMALE")) THEN
 		SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = "Please insert MALE or FEMALE as a gender value";
@@ -72,16 +72,12 @@ END;$$
 DELIMITER ;
 # Use user_paid function to find users who did not pay
 SELECT first_name, last_name
-FROM platform_user
+FROM PLATFORM_USER
 WHERE user_paid(email)='NO';
 
 # Use users_digest procedure returns how much content (count of movies, series) a particular user has seen
 CALL users_digest('sks@gmail.com', @digest);
 SELECT @digest;
-
-# Check id actor with wrong gender value will be inserted, or be denied by our trigger
-INSERT ACTOR VALUES
-('AC100050','Penelope','Cruise','1968-07-23','Spain','famale');
 
 # Insert automatically new movie in DIGITAL_CONTENT table and its respective duration in the MOVIE table
 # If wrong unreasonable (too long) duration in passed, insertion is cancelled in both tables.
@@ -91,8 +87,10 @@ SELECT @sts;
 # EVENT
 # Below it's an event that every 1 minute it goes to platform_user table and appends ' 1' to the first name of every record.
 SET GLOBAL event_scheduler = 1;
-CREATE EVENT InsertToPlatformUser ON SCHEDULE EVERY 1 MINUTE DO UPDATE platform_user SET first_name = CONCAT(first_name, ' 1');					 
+CREATE EVENT InsertToPlatformUser ON SCHEDULE EVERY 1 MINUTE DO UPDATE PLATFORM_USER SET first_name = CONCAT(first_name, ' 1');					 
 					 
-
-
+################# THIS WILL THROW AN ERROR AND IT IS INTENTIONAL ##############################################
+# Check id actor with wrong gender value will be inserted, or be denied by our trigger
+INSERT ACTOR VALUES
+('AC100050','Penelope','Cruise','1968-07-23','Spain','famale');
 					 
